@@ -153,7 +153,7 @@ export default function ViewDetailsPage() {
 
   const rows = [
     { label: idLabel,            value: idValue },
-    { label: 'Visa No',          value: data.visaNumber       || '—' },
+    // { label: 'Visa No',          value: data.visaNumber       || '—' },
     { label: 'Name',             value: data.fullName         || '—' },
     { label: 'Date of birth',    value: fmt(data.dateOfBirth)        },
     { label: 'Profession',       value: data.profession       || '—' },
