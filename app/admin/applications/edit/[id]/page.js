@@ -293,11 +293,6 @@ export default function EditPage() {
                     value={form.applicationDate} onChange={set('applicationDate')} />
                 </div>
 
-                <div className="fg">
-                  <label>Visa Number</label>
-                  <input className="fi" placeholder="e.g. CEG307412/1217" readOnly={readOnly}
-                    value={form.visaNumber} onChange={set('visaNumber')} />
-                </div>
 
                 <div className="fg">
                   <label>Visa Type</label>
