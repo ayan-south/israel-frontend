@@ -8,6 +8,7 @@ import docu from "../../../assets/docu.jpeg";
 import docum from "../../../assets/docum.jpeg";
 import last from "../../../assets/south.jpeg";
 import lasto from "../../../assets/air.jpeg";
+import last1 from "../../../assets/last.jpeg";
 import Image from 'next/image';
 
 export const metadata = { title: 'Home - South Africa Visa Immigration Services' };
@@ -166,7 +167,7 @@ export default function HomePage() {
           priority
         />
           <Image
-          src={img3}
+          src={last1}
           alt="Company Logo"
           width={180}
           height={60}
