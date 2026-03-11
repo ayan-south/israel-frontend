@@ -2,17 +2,17 @@ export default function Footer() {
   const offices = [
     {
       city: "New Delhi",
-      phone: "011-41576142",
+      // phone: "011-41576142",
       email: "delhi@southafricavisa.com",
     },
     {
       city: "Mumbai",
-      phone: "022-49703927",
+      // phone: "022-49703927",
       email: "mumbai@southafricavisa.com",
     },
     {
       city: "Chennai",
-      phone: "080-41251257",
+      // phone: "080-41251257",
       email: "chennai@southafricavisa.com",
     },
   ];
@@ -34,7 +34,7 @@ export default function Footer() {
               <div className="pf-office-card" key={o.city}>
                 <div className="pf-office-city">{o.city}</div>
                 <div className="pf-office-enquiry">
-                  For enquiry call{" "}
+                  {/* For enquiry call{" "} */}
                   <strong className="pf-office-phone">{o.phone}</strong>
                   <br />
                   Mon – Fri &nbsp;·&nbsp; 0900–1200 hrs &amp; 1300–1600 hrs
