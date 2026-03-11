@@ -20,34 +20,14 @@ export default function HomePage() {
 
       {/* ─── HERO IMAGES ─── */}
       <div className="pub-hero pub-content">
-        <Image
-          src={img1}
-          alt="Company Logo"
-          width={180}
-          height={60}
-          priority
-        />
-        <Image
-          src={img2}
-          alt="Company Logo"
-          width={180}
-          height={60}
-          priority
-        />
-        <Image
-          src={img3}
-          alt="Company Logo"
-          width={180}
-          height={60}
-          priority
-        />
+        <Image src={img1} alt="South Africa" width={180} height={60} priority />
+        <Image src={img2} alt="South Africa Embassy" width={180} height={60} priority />
+        <Image src={img3} alt="South Africa" width={180} height={60} priority />
       </div>
 
-      {/* ─── CONTENT: Israel/SA visa info ─── */}
+      {/* ─── CONTENT: South Africa visa info ─── */}
       <div className="pub-content">
-
         <h2>South Africa visa for Indian citizens</h2>
-
         <p>
           Your passport must not be older than 10 years also it must be valid for at least THREE MONTHS
           longer than the intended stay. Your passport must have at least TWO BLANK PAGES to affix the
@@ -74,72 +54,52 @@ export default function HomePage() {
       <div className="pub-section pub-content">
         <div className="pub-section-title">Type of South Africa Visas</div>
 
-       <div className="pub-visa-grid">
-  <div className="pub-visa-card">
-    <div className="pub-visa-card-label">Employment Visa</div>
-    <div className="pub-visa-image">
-        <Image
-          src={doc}
-          alt="Company Logo"
-          width={180}
-          height={60}
-          priority
-        />
-    </div>
-  </div>
+        <div className="pub-visa-grid">
+          <div className="pub-visa-card">
+            <div className="pub-visa-card-label">Employment Visa</div>
+            <div className="pub-visa-image">
+              <Image src={doc} alt="Employment Visa" width={180} height={60} priority />
+            </div>
+          </div>
+          <div className="pub-visa-card">
+            <div className="pub-visa-card-label">Visit Visa</div>
+            <div className="pub-visa-image">
+              <Image src={docu} alt="Visit Visa" width={180} height={60} priority />
+            </div>
+          </div>
+          <div className="pub-visa-card">
+            <div className="pub-visa-card-label">Work Visa</div>
+            <div className="pub-visa-image">
+              <Image src={docum} alt="Work Visa" width={180} height={60} priority />
+            </div>
+          </div>
+        </div>
 
-  <div className="pub-visa-card">
-    <div className="pub-visa-card-label">Visit Visa</div>
-    <div className="pub-visa-image">
-      <Image
-          src={docu}
-          alt="Company Logo"
-          width={180}
-          height={60}
-          priority
-        />
-    </div>
-  </div>
-
-  <div className="pub-visa-card">
-    <div className="pub-visa-card-label">Work Visa</div>
-    <div className="pub-visa-image">
-      <Image
-          src={docum}
-          alt="Company Logo"
-          width={180}
-          height={60}
-          priority
-        />
-    </div>
-  </div>
-</div>
-
-     <div className="pub-content">
-         <p>Price may differ based on the residence location of the applicant</p>
-        <p>Documents pickup and drop charges, photograph development charges, taxes etc. will be additional.</p>
-        <p>I have an Indian passport, do I need a visa to visit South Africa?</p>
-        <p>
-          Yes, Indian travellers need to have a South Africa Visa prior to their arrival in the country.
-          The good news is that, with our online portal you can track your South Africa Visa application
-          status in just a few minutes! We have an easy application process and provide end-to-end
-          assistance to ensure you get your South Africa Visa in the most hassle-free manner possible.
-        </p>
-        <p>Do I need travel insurance to get a South Africa Visa?</p>
-        <p>
-          Travellers do not need to have insurance to get a South Africa visa! All you need are the
-          below mentioned documents and you&apos;re good to go!
-        </p>
-        <br />
-        <p><strong>Basic Requirements to visit South Africa</strong></p>
-        <p>Have a valid Passport and valid South Africa Visa;</p>
-        <p>Be in good health;</p>
-        <p>Good moral character;</p>
-        <p>
-          Be able to convince the immigration officer that you have your family, property, assets, etc.
-          that would serve as an incentive to come back to your home country;
-        </p>
-     </div>
+        <div className="pub-content">
+          <p>Price may differ based on the residence location of the applicant</p>
+          <p>Documents pickup and drop charges, photograph development charges, taxes etc. will be additional.</p>
+          <p>I have an Indian passport, do I need a visa to visit South Africa?</p>
+          <p>
+            Yes, Indian travellers need to have a South Africa Visa prior to their arrival in the country.
+            The good news is that, with our online portal you can track your South Africa Visa application
+            status in just a few minutes! We have an easy application process and provide end-to-end
+            assistance to ensure you get your South Africa Visa in the most hassle-free manner possible.
+          </p>
+          <p>Do I need travel insurance to get a South Africa Visa?</p>
+          <p>
+            Travellers do not need to have insurance to get a South Africa visa! All you need are the
+            below mentioned documents and you&apos;re good to go!
+          </p>
+          <br />
+          <p><strong>Basic Requirements to visit South Africa</strong></p>
+          <p>Have a valid Passport and valid South Africa Visa;</p>
+          <p>Be in good health;</p>
+          <p>Good moral character;</p>
+          <p>
+            Be able to convince the immigration officer that you have your family, property, assets, etc.
+            that would serve as an incentive to come back to your home country;
+          </p>
+        </div>
       </div>
 
       {/* ─── MORE CONTENT ─── */}
@@ -152,29 +112,66 @@ export default function HomePage() {
 
         {/* Second hero images */}
         <div className="pub-hero-2" style={{ marginTop: 16 }}>
-          <Image
-          src={last}
-          alt="Company Logo"
-          width={180}
-          height={60}
-          priority
-        />
-          <Image
-          src={lasto}
-          alt="Company Logo"
-          width={180}
-          height={60}
-          priority
-        />
-          <Image
-          src={last1}
-          alt="Company Logo"
-          width={180}
-          height={60}
-          priority
-        />
-          
-          
+          <Image src={last} alt="South Africa" width={180} height={60} priority />
+          <Image src={lasto} alt="South Africa Airport" width={180} height={60} priority />
+          <Image src={last1} alt="South Africa" width={180} height={60} priority />
+        </div>
+
+        <br />
+
+        {/* ─── SOUTH AFRICA FACTS AND FIGURES ─── */}
+        <div className="pub-facts-section">
+          <div className="pub-facts-title">South Africa Facts and Figures</div>
+          <div className="pub-facts-table">
+            <div className="pub-facts-row">
+              <div className="pub-facts-label">Region:</div>
+              <div className="pub-facts-value">Africa</div>
+            </div>
+            <div className="pub-facts-row">
+              <div className="pub-facts-label">Major cities :</div>
+              <div className="pub-facts-value">Johannesburg, Cape Town, Durban</div>
+            </div>
+            <div className="pub-facts-row">
+              <div className="pub-facts-label">Independence Day:</div>
+              <div className="pub-facts-value">27 April</div>
+            </div>
+            <div className="pub-facts-row">
+              <div className="pub-facts-label">Capital:</div>
+              <div className="pub-facts-value">Pretoria (administrative), Cape Town (legislative), Bloemfontein (judicial)</div>
+            </div>
+            <div className="pub-facts-row">
+              <div className="pub-facts-label">Time in South Africa:</div>
+              <div className="pub-facts-value">IST (-) 3.30 hours</div>
+            </div>
+            <div className="pub-facts-row">
+              <div className="pub-facts-label">Language:</div>
+              <div className="pub-facts-value">Zulu, Xhosa, Afrikaans, English (11 official languages)</div>
+            </div>
+            <div className="pub-facts-row">
+              <div className="pub-facts-label">Area:</div>
+              <div className="pub-facts-value">1,219,090 sq. km</div>
+            </div>
+            <div className="pub-facts-row">
+              <div className="pub-facts-label">Population:</div>
+              <div className="pub-facts-value">60,142,978</div>
+            </div>
+            <div className="pub-facts-row">
+              <div className="pub-facts-label">Currency:</div>
+              <div className="pub-facts-value">South African Rand (ZAR)</div>
+            </div>
+            <div className="pub-facts-row">
+              <div className="pub-facts-label">Main Airlines:</div>
+              <div className="pub-facts-value">South African Airways</div>
+            </div>
+            <div className="pub-facts-row">
+              <div className="pub-facts-label">International Airports :</div>
+              <div className="pub-facts-value">OR Tambo International (JNB); Cape Town International (CPT); King Shaka International (DUR)</div>
+            </div>
+            <div className="pub-facts-row">
+              <div className="pub-facts-label">Best time to visit:</div>
+              <div className="pub-facts-value">May to September</div>
+            </div>
+          </div>
         </div>
 
         <br />

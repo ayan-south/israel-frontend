@@ -1162,3 +1162,70 @@ body {
   body { background: #fff; }
   .result-page { background: #fff; padding: 0; }
 }
+
+
+/* ─── SOUTH AFRICA FACTS AND FIGURES ─── */
+
+.pub-facts-section {
+  margin: 24px 0;
+  padding: 0;
+}
+
+.pub-facts-title {
+  font-size: 0.8rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: #1a1a1a;
+}
+
+/* ── MOBILE: stacked label + value ── */
+.pub-facts-table {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.pub-facts-row {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 10px;
+}
+
+.pub-facts-label {
+  font-size: 0.6rem;
+  color: #555;
+  font-weight: 500;
+}
+
+.pub-facts-value {
+  font-size: 0.55rem;
+  color: #1a1a1a;
+}
+
+/* ── DESKTOP (tablet+): two-column layout ── */
+@media (min-width: 640px) {
+  .pub-facts-title {
+    font-size: 1.4rem;
+  }
+
+  .pub-facts-row {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 0;
+    padding-bottom: 14px;
+  }
+
+  .pub-facts-label {
+    width: 260px;
+    min-width: 260px;
+    font-size: 0.82rem;
+    color: #444;
+  }
+
+  .pub-facts-value {
+    font-size: 0.82rem;
+    flex: 1;
+  }
+}
