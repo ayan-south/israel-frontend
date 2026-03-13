@@ -16,22 +16,20 @@ const FlagIndia = () => (
   </svg>
 );
 
-const FlagSA = () => (
-  <svg width="24" height="16" viewBox="0 0 36 24">
-    <rect width="36" height="24" fill="#007A4D" />
-    <rect width="36" height="8" fill="#DE3831" />
-    <rect y="16" width="36" height="8" fill="#002395" />
-    <rect y="8" width="36" height="8" fill="#FFFFFF" />
-    <polygon points="0,0 0,24 15,12" fill="#FFB612" />
-    <polygon points="0,1.5 0,22.5 12.5,12" fill="#000000" />
-    <polygon points="0,4 0,20 9,12" fill="#007A4D" />
+const FlagIsrael = () => (
+  <svg width="24" height="16" viewBox="0 0 24 16">
+    <rect width="24" height="16" fill="#FFFFFF" />
+    <rect y="2" width="24" height="2.5" fill="#0038B8" />
+    <rect y="11.5" width="24" height="2.5" fill="#0038B8" />
+    <polygon points="12,5.5 14.6,10 9.4,10" fill="none" stroke="#0038B8" strokeWidth="0.9" />
+    <polygon points="12,10.5 9.4,6 14.6,6" fill="none" stroke="#0038B8" strokeWidth="0.9" />
   </svg>
 );
 
 export default function Header({ activePage }) {
   const pathname = usePathname();
   const [indiaTime, setIndiaTime] = useState('');
-  const [saTime, setSaTime] = useState('');
+  const [israelTime, setIsraelTime] = useState('');
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
@@ -43,7 +41,7 @@ export default function Header({ activePage }) {
           year: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false,
         });
       setIndiaTime(fmtT('Asia/Kolkata'));
-      setSaTime(fmtT('Africa/Johannesburg'));
+      setIsraelTime(fmtT('Asia/Jerusalem'));
     };
     tick();
     const id = setInterval(tick, 1000);
@@ -65,9 +63,8 @@ export default function Header({ activePage }) {
 
   return (
     <>
-
       {/* TOP HEADER */}
-      <div className="pub-top">
+      <div className="pub-top" style={{ background: '#f4f4f4', borderBottom: '2px solid #d0d0d0' }}>
         <div className="pub-logo">
           <Image src={logo} alt="Company Logo" width={180} height={60} priority />
         </div>
@@ -78,15 +75,15 @@ export default function Header({ activePage }) {
             <span className="country-name">India</span>
           </div>
           <div className="pub-timer-row">
-            <span>{saTime} SAST</span>
-            <FlagSA />
-            <span className="country-name">South Africa</span>
+            <span>{israelTime} IST</span>
+            <FlagIsrael />
+            <span className="country-name">Israel</span>
           </div>
         </div>
       </div>
 
       {/* DESKTOP NAVBAR */}
-      <nav className="pub-nav">
+      <nav className="pub-nav" style={{ background: '#4a4a4a' }}>
         {navLinks.map((l) => (
           <Link key={l.href + l.label} href={l.href} className={l.className}>{l.label}</Link>
         ))}
@@ -103,8 +100,8 @@ export default function Header({ activePage }) {
         </button>
       </nav>
 
-      {/* MOBILE MENU — outside nav, in normal document flow */}
-      <div className={`pub-nav-mobile-menu${menuOpen ? ' open' : ''}`}>
+      {/* MOBILE MENU */}
+      <div className={`pub-nav-mobile-menu${menuOpen ? ' open' : ''}`} style={{ background: '#4a4a4a' }}>
         {navLinks.map((l) => (
           <Link key={l.href + l.label} href={l.href} className={l.className}>{l.label}</Link>
         ))}

@@ -7,8 +7,8 @@ import styles from './track-application.module.css';
 
 const CITIES = [
   { id: 'delhi',     text: 'Track your Passport for Delhi only',    working: false },
-  { id: 'bengaluru',   text: 'Track your Passport for Mumbai',     working: false },
-  { id: 'chennai',   text: 'Track your Passport for Chennai',        working: true  },
+  { id: 'bengaluru', text: 'Track your Passport for Mumbai',        working: false },
+  { id: 'chennai',   text: 'Track your Passport for Chennai',       working: true  },
 ];
 
 export default function TrackApplicationPage() {
@@ -28,10 +28,9 @@ export default function TrackApplicationPage() {
       <Header />
 
       <div className={styles.page}>
-        {/* Red label + title + breadcrumb — Image 3 */}
         <div className={styles.pageHead}>
           <div className={styles.titleRow}>
-            <h1 className={styles.pageTitle}>South Africa Ambassy in India</h1>
+            <h1 className={styles.pageTitle}>Israel Embassy in India</h1>
             <div className={styles.breadcrumb}>
               <a href="/home">Home</a>
               <span>›</span>
@@ -43,7 +42,7 @@ export default function TrackApplicationPage() {
         <hr className={styles.divider} />
 
         <p className={styles.intro}>
-          Applicants who have already applied for a visa can track application using our visa application tracker service:
+          Applicants who have already applied for an Israel visa can track their application using our visa application tracker service:
         </p>
 
         <ul className={styles.linksList}>
@@ -53,9 +52,6 @@ export default function TrackApplicationPage() {
               <button className={styles.clickHere} onClick={() => handleClick(city)}>
                 click here
               </button>
-              {/* <span className={`${styles.cityTag} ${city.working ? styles.cityTagActive : styles.cityTagDisabled}`}>
-                {city.label}
-              </span> */}
             </li>
           ))}
         </ul>
@@ -66,7 +62,7 @@ export default function TrackApplicationPage() {
             <div className={styles.notAvailIcon}>⚠️</div>
             <div>
               <strong>Service Not Available</strong>
-              <p>This tracking service is currently not available for this region. Our online tracking facility is temporarily unavailable. Please contact the South Africa Embassy directly for assistance, or use the Chennai portal below.</p>
+              <p>This tracking service is currently not available for this region. Our online tracking facility is temporarily unavailable. Please contact the Israel Embassy directly for assistance, or use the online portal below.</p>
               <button className={styles.tryChennai} onClick={() => router.push('/track-form')}>
                 Use Online Tracker →
               </button>

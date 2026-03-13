@@ -62,7 +62,7 @@ export default function ApplicationsPage() {
 
   return (
     <div className="fade">
-      <h1 className="page-title">All Applications</h1>
+      <h1 className="page-title">All Israel Visa Applications</h1>
 
       <div className="card">
         {/* ── Filter bar ── */}
@@ -150,7 +150,7 @@ export default function ApplicationsPage() {
                       {(page-1)*LIMIT + idx + 1}
                     </td>
                     <td>
-                      <span style={{ fontFamily:'monospace', fontSize:12, color:'#1a56db', fontWeight:700 }}>
+                      <span style={{ fontFamily:'monospace', fontSize:12, color:'#555', fontWeight:700 }}>
                         {c.applicationNumber}
                       </span>
                     </td>
@@ -162,7 +162,6 @@ export default function ApplicationsPage() {
                     <td><StatusBadge status={c.status} /></td>
                     <td>
                       <div style={{ display:'flex', alignItems:'center', gap:4 }}>
-                        {/* View Details — goes to Image 1 page */}
                         <Link
                           href={`/admin/applications/view/${c._id}`}
                           className="btn-view"
@@ -193,7 +192,6 @@ export default function ApplicationsPage() {
                           </button>
                         )}
 
-                        {/* PDF download for Approved/Issued */}
                         {(c.status === 'Approved' || c.status === 'Issued') && can(user, 'canDownload') && (
                           <button
                             className="btn-icon-only"

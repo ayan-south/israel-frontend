@@ -9,7 +9,7 @@ const VISA_TYPES = [
   'Student Visa','Medical Visa','Family Visa','Transit Visa','Other',
 ];
 const NATIONALITIES = [
-  'Please Select','Indian','Pakistani','Bangladeshi','South African','Nigerian',
+  'Please Select','Indian','Pakistani','Bangladeshi','Israeli','Nigerian',
   'Kenyan','Ghanaian','Egyptian','Moroccan','Other',
 ];
 
@@ -40,7 +40,6 @@ export default function TrackPage() {
       const data = await r.json();
 
       if (data?.success) {
-        // Encode data in URL params — result page pe dikhao
         const params = new URLSearchParams({
           id:   data.data.candidateId,
           pass: form.passportNumber.trim().toUpperCase(),
@@ -64,9 +63,9 @@ export default function TrackPage() {
       <div className="track-page">
         {/* Page title */}
         <div className="track-hero">
-          <h1>Track Your Application</h1>
+          <h1>Track Your Israel Visa Application</h1>
           <p>
-            Applicants who have already applied for a visa can track application using our
+            Applicants who have already applied for an Israel visa can track their application using our
             visa application tracker service:
           </p>
         </div>
@@ -77,7 +76,7 @@ export default function TrackPage() {
         {/* Form */}
         <div className="track-form-wrap">
           <div className="track-form-box">
-            <div className="track-form-title">Check Your Visa Status</div>
+            <div className="track-form-title">Check Your Israel Visa Status</div>
 
             {error && (
               <div className="track-error">
@@ -101,7 +100,7 @@ export default function TrackPage() {
               </div>
 
               <div className="track-field">
-                <label>Date of (dd/mm/yyyy)*: <strong>DOB</strong></label>
+                <label>Date of Birth (dd/mm/yyyy) *:</label>
                 <input
                   type="date"
                   value={form.dob}

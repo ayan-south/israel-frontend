@@ -15,16 +15,13 @@ const printOnlyDoc = (appNo, visaDocUrl, visaDocType) => {
   if (!visaDocUrl) { alert('No document to print.'); return; }
 
   if (visaDocType === 'pdf') {
-    // PDF: directly new tab mein open karo — browser native PDF print use hoga
     const w = window.open(visaDocUrl, '_blank');
     if (!w) { alert('Popup blocked. Please allow popups for this site.'); return; }
     w.addEventListener('load', () => { setTimeout(() => { w.print(); }, 500); });
-    // Fallback agar load event na chale
     setTimeout(() => { try { w.print(); } catch(e) {} }, 2000);
     return;
   }
 
-  // Image: naya window kholo, image POORI load hone ke BAAD print — turant band nahi hoga
   const w = window.open('', '_blank');
   if (!w) { alert('Popup blocked. Please allow popups for this site.'); return; }
   w.document.write(`<!DOCTYPE html><html><head>
@@ -91,7 +88,6 @@ function ResultContent() {
   if (!data) return null;
 
   const isApproved  = data.status === 'Approved' || data.status === 'Issued';
-  // Visa doc URL — verified via query params
   const visaDocUrl = data.hasVisaDocument
     ? `/api/candidates/public/visa-doc/${data.candidateId}?${
         data.identifierType === 'control'
@@ -108,7 +104,6 @@ function ResultContent() {
     return '';
   };
 
-  // Show Passport No / Control No based on identifierType
   const rows = [
     ...(data.identifierType === 'control'
       ? [
@@ -119,7 +114,6 @@ function ResultContent() {
           { label: 'Passport No',    value: data.passportNumber || '—' },
         ]
     ),
-    // { label: 'Visa No',         value: data.visaNumber       || '—' },
     { label: 'Name',            value: data.fullName         || '—' },
     { label: 'Date of birth',   value: fmt(data.dateOfBirth)        },
     { label: 'Profession',      value: data.profession       || '—' },
@@ -147,7 +141,7 @@ function ResultContent() {
 
       {/* Authority bar */}
       <div className={`${styles.authorityBar} ${!isApproved ? styles.authorityBarRound : ''}`}>
-        South Africa Visa Immigration Services
+        Israel Visa Immigration Services
       </div>
 
       {/* Details table */}
@@ -169,21 +163,19 @@ function ResultContent() {
         </table>
       </div>
 
-      {/* ── Visa Document — uploaded image or PDF ── */}
+      {/* Visa Document */}
       {isApproved && data.hasVisaDocument && (
         <div className={styles.visaDocSection}>
           <div className={styles.visaDocTitle}>Your Visa Document</div>
 
           <div className={styles.visaDocFrame} id="user-visa-doc-area">
             {data.visaDocumentType === 'pdf' ? (
-              /* PDF — embed full height */
               <embed
                 src={visaDocUrl}
                 type="application/pdf"
                 className={styles.pdfEmbed}
               />
             ) : (
-              /* Image — full width */
               // eslint-disable-next-line @next/next/no-img-element
               <img src={visaDocUrl} alt="Visa Document" className={styles.visaDocImg} />
             )}

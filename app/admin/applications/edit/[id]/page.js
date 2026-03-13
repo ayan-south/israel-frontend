@@ -217,7 +217,7 @@ export default function EditPage() {
 
   if (loading) return (
     <div style={{ display:'flex', alignItems:'center', justifyContent:'center', minHeight:'50vh', flexDirection:'column', gap:12 }}>
-      <div className="spin spin-dark" style={{ width:28, height:28, border:'3px solid #e2e8f0', borderTopColor:'#1a56db' }} />
+      <div className="spin spin-dark" style={{ width:28, height:28, border:'3px solid #e2e8f0', borderTopColor:'#4b5563' }} />
       <p style={{ color:'#6b7280', fontSize:14 }}>Loading…</p>
     </div>
   );
@@ -263,9 +263,9 @@ export default function EditPage() {
                         onClick={() => !readOnly && setForm(p => ({ ...p, identifierType: t }))}
                         style={{
                           padding:'8px 20px', borderRadius:6, fontSize:13, fontWeight:600, cursor: readOnly ? 'default' : 'pointer',
-                          border:`2px solid ${form.identifierType === t ? '#1a56db' : '#e5e7eb'}`,
-                          background: form.identifierType === t ? '#eff6ff' : '#fff',
-                          color: form.identifierType === t ? '#1a56db' : '#6b7280',
+                          border:`2px solid ${form.identifierType === t ? '#4b5563' : '#e5e7eb'}`,
+                          background: form.identifierType === t ? '#f3f4f6' : '#fff',
+                          color: form.identifierType === t ? '#4b5563' : '#6b7280',
                           transition:'all 0.15s',
                         }}
                       >
@@ -424,10 +424,10 @@ export default function EditPage() {
 
                 {/* New file selected */}
                 {visaDocFile && (
-                  <div style={{ background:'#eff6ff', border:'1px solid #bfdbfe', borderRadius:6, padding:'8px 10px', marginBottom:10, display:'flex', alignItems:'center', gap:8 }}>
+                  <div style={{ background:'#f3f4f6', border:'1px solid #d1d5db', borderRadius:6, padding:'8px 10px', marginBottom:10, display:'flex', alignItems:'center', gap:8 }}>
                     <span style={{ fontSize:16 }}>{visaDocName.endsWith('.pdf') ? '📄' : '🖼️'}</span>
                     <div>
-                      <div style={{ fontSize:12, fontWeight:600, color:'#1e40af' }}>New: {visaDocName}</div>
+                      <div style={{ fontSize:12, fontWeight:600, color:'#374151' }}>New: {visaDocName}</div>
                       <div style={{ fontSize:11, color:'#6b7280' }}>({(visaDocFile.size / 1024 / 1024).toFixed(1)}MB)</div>
                     </div>
                     <button type="button" onClick={() => { setVisaDocFile(null); setVisaDocName(''); }}

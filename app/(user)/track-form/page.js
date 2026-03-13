@@ -85,14 +85,14 @@ export default function TrackFormPage() {
 
       <div className={styles.page}>
         <div className={styles.pageHead}>
-          <h1 className={styles.pageTitle}>Track Your Application</h1>
+          <h1 className={styles.pageTitle}>Track Your Israel Visa Application</h1>
         </div>
 
         <hr className={styles.divider} />
 
         <div className={styles.formWrap}>
           <div className={styles.formBox}>
-            <div className={styles.formTitle}>Check Your Visa Status</div>
+            <div className={styles.formTitle}>Check Your Israel Visa Status</div>
 
             {error && (
               <div className={styles.errorBox}>
@@ -140,7 +140,7 @@ export default function TrackFormPage() {
 
               {/* ── DOB ── */}
               <div className={styles.field}>
-                <label>Date of (dd/mm/yyyy)*: DOB</label>
+                <label>Date of Birth (dd/mm/yyyy) *:</label>
                 <input type="date" value={form.dob} onChange={set('dob')} required />
               </div>
 
@@ -153,7 +153,7 @@ export default function TrackFormPage() {
                 </select>
               </div>
 
-              {/* ── Nationality — 197 countries ── */}
+              {/* ── Nationality ── */}
               <div className={styles.field}>
                 <label>Nationality *:</label>
                 <select value={form.nationality} onChange={set('nationality')}>
