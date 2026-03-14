@@ -83,7 +83,7 @@ export default function Header({ activePage }) {
       </div>
 
       {/* DESKTOP NAVBAR */}
-      <nav className="pub-nav" style={{ background: '#5b5b5b' }}>
+      <nav className="pub-nav" style={{ background: '#9E9E9E' }}>
         {navLinks.map((l) => (
           <Link key={l.href + l.label} href={l.href} className={l.className}>{l.label}</Link>
         ))}
