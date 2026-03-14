@@ -113,9 +113,9 @@ body {
   align-items: center;
   transition: background 0.15s;
 }
-.pub-nav a:hover { background: rgba(55, 55, 55, 0.13); }
+/* .pub-nav a:hover { background: rgba(55, 55, 55, 0.13); } */
 .pub-nav a.active {
-  background: rgba(14, 14, 14, 0.211);
+  /* background: rgba(14, 14, 14, 0.211); */
   font-weight: 700;
 }
 .pub-nav a.nav-track {
@@ -466,7 +466,7 @@ body {
   border: 1px solid #bbb;
   background: #fff;
   padding: 16px 20px;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Roboto',Arial, Helvetica, sans-serif;
   font-size: 11px;
   max-width: 700px;
   margin: 0 auto;
@@ -514,7 +514,7 @@ body {
 .visa-doc .visa-no-val { font-size: 14px; font-weight: bold; color: #c00000; letter-spacing: 1px; }
 .visa-doc .barcode {
   border: 1px solid #888; padding: 3px 8px;
-  font-family: monospace; font-size: 8px; letter-spacing: 2px;
+  font-family: 'Roboto', monospace; font-size: 8px; letter-spacing: 2px;
 }
 .visa-doc .red-stmt {
   color: #c00000; font-size: 10px; font-weight: bold;
@@ -554,7 +554,7 @@ body {
 }
 .visa-doc .sig-cursive {
   font-style: italic; font-size: 13px; color: #374151; margin-bottom: 2px;
-  font-family: Georgia, serif;
+  font-family: 'Roboto', Georgia, serif;
 }
 .visa-doc .sig-title { font-size: 9px; line-height: 1.5; }
 .visa-doc .sig-seal {
@@ -668,7 +668,7 @@ body {
   position: absolute;
   top: 6px; left: 10px;
   line-height: 1;
-  font-family: Georgia, serif;
+  font-family: 'Roboto', Georgia, serif;
 }
 .pub-footer-bottom {
   border-top: 1px solid #444;
@@ -688,7 +688,7 @@ body {
 
        
         .pf-root {
-          font-family: 'DM Sans', sans-serif;
+          font-family:'Roboto', 'DM Sans', sans-serif;
           background: var(--footer-bg);
           color: var(--text-primary);
           padding: 0;
@@ -726,7 +726,7 @@ body {
         }
 
         .pf-contact-header-label {
-          font-family: 'Cormorant Garamond', serif;
+          font-family:'Roboto', 'Cormorant Garamond', serif;
           font-size: 13px;
           font-weight: 600;
           letter-spacing: 0.2em;
@@ -768,7 +768,7 @@ body {
         }
 
         .pf-office-city {
-          font-family: 'Cormorant Garamond', serif;
+          font-family:'Roboto', 'Cormorant Garamond', serif;
           font-size: 22px;
           font-weight: 700;
           color: var(--text-primary);
@@ -819,7 +819,7 @@ body {
           margin-top: 14px;
           background: var(--footer-accent);
           color: #fff;
-          font-family: 'DM Sans', sans-serif;
+          font-family:'Roboto', 'DM Sans', sans-serif;
           font-size: 12px;
           font-weight: 500;
           letter-spacing: 0.06em;
@@ -858,7 +858,7 @@ body {
         }
 
         .pf-info-block-title {
-          font-family: 'Cormorant Garamond', serif;
+          font-family: 'Roboto','Cormorant Garamond', serif;
           font-size: 15px;
           font-weight: 700;
           color: var(--text-primary);
@@ -894,7 +894,7 @@ body {
         }
 
         .pf-quote-mark {
-          font-family: 'Cormorant Garamond', serif;
+          font-family:'Roboto', 'Cormorant Garamond', serif;
           font-size: 56px;
           color: var(--footer-accent);
           opacity: 0.25;
@@ -1423,7 +1423,7 @@ body {
           text-align: center;
           padding: 8px 16px;
           font-size: 14px;
-          font-family: 'Georgia', serif;
+          font-family: 'Roboto','Georgia', serif;
           letter-spacing: 0.3px;
         }
 
@@ -1447,7 +1447,7 @@ body {
           align-items: center;
           justify-content: center;
           font-size: clamp(80px, 18vw, 180px);
-          font-family: 'Georgia', 'Times New Roman', serif;
+          font-family: 'Roboto','Georgia', 'Times New Roman', serif;
           font-weight: 700;
           color: rgba(255, 255, 255, 0.18);
           letter-spacing: 0.15em;
@@ -1470,7 +1470,7 @@ body {
         .pub-hero-card h1 {
           margin: 0;
           font-size: 32px;
-          font-family: 'Georgia', serif;
+          font-family: 'Roboto','Georgia', serif;
           color: #3a4f7a;
           font-weight: 400;
           letter-spacing: 0.5px;
@@ -1491,7 +1491,7 @@ body {
           display: inline-block;
           padding: 16px 24px;
           font-size: 14px;
-          font-family: 'Georgia', serif;
+          font-family: 'Roboto','Georgia', serif;
           color: #333;
           text-decoration: none;
           border-bottom: 3px solid transparent;
@@ -1524,7 +1524,7 @@ body {
           display: block;
           padding: 14px 24px;
           font-size: 14px;
-          font-family: 'Georgia', serif;
+          font-family: 'Roboto','Georgia', serif;
           color: #333;
           text-decoration: none;
           border-bottom: 1px solid #e0e0e0;

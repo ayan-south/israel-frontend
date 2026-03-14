@@ -3,6 +3,9 @@
    Same alignment token as home.css
 ══════════════════════════════════════════════════════ */
 
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap');
+
+
 :root {
   --about-side-pad: 90px;
   --about-accent: #e05c5c;      /* matches the salmon/red breadcrumb bar */
@@ -24,8 +27,9 @@
 
 .about-breadcrumb-bar span {
   color: #fff;
-  font-size: 13px;
+  font-size: 18px;
   font-weight: 600;
+  font-family: 'Roboto', 'Times New Roman', serif;
   letter-spacing: 0.3px;
 }
 
@@ -46,6 +50,7 @@
 
 .about-intro-section p {
   font-size: 14px;
+   font-family: 'Roboto', 'Times New Roman', serif;
   line-height: 1.9;
   color: var(--about-text);
   margin-bottom: 18px;
@@ -61,6 +66,7 @@
 .about-strong-heading {
   font-size: 15px;
   font-weight: 800;
+   font-family: 'Roboto', 'Times New Roman', serif;
   color: var(--about-text);
   text-decoration: underline;
   letter-spacing: 0.4px;
@@ -80,6 +86,7 @@
 .about-strong-list li {
   font-size: 14px;
   line-height: 1.75;
+   font-family: 'Roboto', 'Times New Roman', serif;
   color: var(--about-text);
   padding-left: 16px;
   position: relative;
@@ -91,6 +98,7 @@
   left: 0;
   color: var(--about-accent);
   font-weight: 700;
+   font-family: 'Roboto', 'Times New Roman', serif;
 }
 
 /* ── Responsive ── */
@@ -107,6 +115,6 @@
 
   .about-intro-section { padding: 24px 0 20px; }
   .about-strong-section { padding: 20px 0 28px; }
-  .about-intro-section p { font-size: 13.5px; }
+  .about-intro-section p { font-size: 13.5px;  font-family: 'Roboto', 'Times New Roman', serif;}
   .about-strong-list li { font-size: 13.5px; }
 }
