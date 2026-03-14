@@ -113,9 +113,9 @@ body {
   align-items: center;
   transition: background 0.15s;
 }
-.pub-nav a:hover { background: rgba(255,255,255,0.13); }
+.pub-nav a:hover { background: rgba(55, 55, 55, 0.13); }
 .pub-nav a.active {
-  background: rgba(255,255,255,0.22);
+  background: rgba(14, 14, 14, 0.211);
   font-weight: 700;
 }
 .pub-nav a.nav-track {
@@ -175,8 +175,8 @@ body {
         }
         .pub-nav-mobile-menu a:last-child { border-bottom: none; }
         .pub-nav-mobile-menu a:hover,
-        .pub-nav-mobile-menu a:active { background: rgba(255,255,255,0.12); }
-        .pub-nav-mobile-menu a.active { background: rgba(255,255,255,0.2); font-weight: 700; }
+        .pub-nav-mobile-menu a:active { background: rgba(52, 52, 52, 0.12); }
+        .pub-nav-mobile-menu a.active { background: rgba(40, 40, 40, 0.2); font-weight: 700; }
         .pub-nav-mobile-menu a.nav-track { background: #e53935; font-weight: 700; }
         .pub-nav-mobile-menu a.nav-track:hover { background: #c62828; }
 

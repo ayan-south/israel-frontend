@@ -2,15 +2,15 @@ export default function Footer() {
   const offices = [
     {
       city: "New Delhi",
-      email: "delhi@israelvisa.com",
+      email: "delhi@israelgovcovisa.com",
     },
     {
       city: "Mumbai",
-      email: "mumbai@israelvisa.com",
+      email: "mumbai@israelgovcovisa.com",
     },
     {
-      city: "Chennai",
-      email: "chennai@israelvisa.com",
+      city: "Bangalore",
+      email: "bangalore@isarelgovcovisa.com",
     },
   ];
 
@@ -33,7 +33,7 @@ export default function Footer() {
                 <div className="pf-office-enquiry" style={{ color: '#aaa' }}>
                   <strong className="pf-office-phone">{o.phone}</strong>
                   <br />
-                  Mon – Fri &nbsp;·&nbsp; 0900–1200 hrs &amp; 1300–1600 hrs
+                  Mon – Fri 
                   <br />
                   <em style={{ fontSize: 11, color: '#666' }}>except public holidays</em>
                 </div>

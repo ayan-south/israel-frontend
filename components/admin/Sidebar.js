@@ -69,8 +69,8 @@ export default function Sidebar() {
             </svg>
           </div>
           <div className="sidebar-brand-info">
-            <h3>{user?.country || 'Admin Panel'}</h3>
-            <p>{user?.name || user?.email || ''}</p>
+            <h3>Admin Panel</h3>
+            <p>Visa management</p>
           </div>
         </div>
 

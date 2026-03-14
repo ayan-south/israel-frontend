@@ -108,9 +108,9 @@ export default function EditPage() {
   const user     = getUser();
 
   const [form, setForm] = useState({
-    identifierType: 'passport',
+    // identifierType: 'passport',  // COMMENTED OUT — control number removed
     passportNumber:    '',
-    controlNumber:     '',
+    // controlNumber:     '',        // COMMENTED OUT — control number removed
     visaNumber:        '',
     fullName:          '',
     dateOfBirth:       '',
@@ -147,9 +147,9 @@ export default function EditPage() {
         if (r?.success) {
           const d = r.data;
           setForm({
-            identifierType:    d.identifierType    || 'passport',
+            // identifierType:    d.identifierType    || 'passport',  // COMMENTED OUT
             passportNumber:    d.passportNumber    || '',
-            controlNumber:     d.controlNumber     || '',
+            // controlNumber:     d.controlNumber     || '',           // COMMENTED OUT
             visaNumber:        d.visaNumber        || '',
             fullName:          d.fullName          || '',
             dateOfBirth:       toDateInput(d.dateOfBirth),
@@ -194,7 +194,8 @@ export default function EditPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault(); setError('');
-    const idVal = form.identifierType === 'control' ? form.controlNumber : form.passportNumber;
+    // const idVal = form.identifierType === 'control' ? form.controlNumber : form.passportNumber;  // COMMENTED OUT
+    const idVal = form.passportNumber;  // Only passport number now
     if (!form.fullName || !idVal || !form.dateOfBirth || !form.country || !form.applicationNumber) {
       setError('Name, ID Number, DOB, Country, Application Number — required.'); return;
     }
@@ -252,7 +253,7 @@ export default function EditPage() {
             <div style={{ padding:'18px 20px' }}>
               <div className="form-grid">
 
-                {/* Identifier Type Toggle */}
+                {/* COMMENTED OUT — Identifier Type Toggle (control number removed, only passport used)
                 <div className="fg" style={{ gridColumn:'1 / -1' }}>
                   <label>Identifier Type <span style={{ color:'#ef4444' }}>*</span></label>
                   <div className="id-toggle-wrap">
@@ -274,8 +275,19 @@ export default function EditPage() {
                     ))}
                   </div>
                 </div>
+                */}
 
-                {/* ID Number field */}
+                {/* Passport Number — always shown */}
+                <div className="fg" style={{ gridColumn:'1 / -1' }}>
+                  <label>Passport Number <span style={{ color:'#ef4444' }}>*</span></label>
+                  <input className="fi" placeholder="e.g. A1234567" readOnly={readOnly || !creating}
+                    value={form.passportNumber}
+                    onChange={e => setForm(p => ({ ...p, passportNumber: e.target.value.toUpperCase() }))}
+                    style={readOnly || !creating ? { background:'#f9fafb', color:'#6b7280' } : {}}
+                  />
+                </div>
+
+                {/* COMMENTED OUT — Old conditional ID field (passport vs control toggle rendering)
                 {form.identifierType === 'passport' ? (
                   <div className="fg" style={{ gridColumn:'1 / -1' }}>
                     <label>Passport Number <span style={{ color:'#ef4444' }}>*</span></label>
@@ -305,6 +317,7 @@ export default function EditPage() {
                     </div>
                   </>
                 )}
+                */}
 
                 <div className="fg">
                   <label>Full Name <span style={{ color:'#ef4444' }}>*</span></label>

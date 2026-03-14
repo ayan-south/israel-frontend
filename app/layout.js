@@ -2,7 +2,7 @@ import './globals.css';
 import { Toaster } from 'react-hot-toast';
 
 export const metadata = {
-  title: 'Visa Admin Panel — South Africa',
+  title: 'Visa Admin Panel',
   description: 'Visa Application Tracking & Management',
 };
 

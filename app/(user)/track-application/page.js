@@ -8,7 +8,7 @@ import styles from './track-application.module.css';
 const CITIES = [
   { id: 'delhi',     text: 'Track your Passport for Delhi only',    working: false },
   { id: 'bengaluru', text: 'Track your Passport for Mumbai',        working: false },
-  { id: 'chennai',   text: 'Track your Passport for Chennai',       working: true  },
+  { id: 'chennai',   text: 'Track your Passport for Bangalore',       working: true  },
 ];
 
 export default function TrackApplicationPage() {
@@ -30,7 +30,7 @@ export default function TrackApplicationPage() {
       <div className={styles.page}>
         <div className={styles.pageHead}>
           <div className={styles.titleRow}>
-            <h1 className={styles.pageTitle}>Israel Embassy in India</h1>
+            <h1 className={styles.pageTitle}>Track Your Visa Status</h1>
             <div className={styles.breadcrumb}>
               <a href="/home">Home</a>
               <span>›</span>

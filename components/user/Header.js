@@ -83,7 +83,7 @@ export default function Header({ activePage }) {
       </div>
 
       {/* DESKTOP NAVBAR */}
-      <nav className="pub-nav" style={{ background: '#4a4a4a' }}>
+      <nav className="pub-nav" style={{ background: '#5b5b5b' }}>
         {navLinks.map((l) => (
           <Link key={l.href + l.label} href={l.href} className={l.className}>{l.label}</Link>
         ))}
@@ -101,7 +101,7 @@ export default function Header({ activePage }) {
       </nav>
 
       {/* MOBILE MENU */}
-      <div className={`pub-nav-mobile-menu${menuOpen ? ' open' : ''}`} style={{ background: '#4a4a4a' }}>
+      <div className={`pub-nav-mobile-menu${menuOpen ? ' open' : ''}`} style={{ background: '#5b5b5b' }}>
         {navLinks.map((l) => (
           <Link key={l.href + l.label} href={l.href} className={l.className}>{l.label}</Link>
         ))}

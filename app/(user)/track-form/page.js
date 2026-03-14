@@ -37,7 +37,7 @@ const COUNTRIES = [
 
 export default function TrackFormPage() {
   const router = useRouter();
-  const [identifierType, setIdentifierType] = useState('passport');
+  // const [identifierType, setIdentifierType] = useState('passport');  // COMMENTED OUT — control number removed
   const [form, setForm] = useState({ idNumber:'', dob:'', visaType:'', nationality:'' });
   const [loading, setLoading] = useState(false);
   const [error,   setError]   = useState('');
@@ -47,13 +47,15 @@ export default function TrackFormPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
-    if (!form.idNumber.trim()) { setError(`${identifierType === 'passport' ? 'Passport Number' : 'Control Number'} is required.`); return; }
+    if (!form.idNumber.trim()) { setError('Passport Number is required.'); return; }
     if (!form.dob) { setError('Date of Birth is required.'); return; }
     setLoading(true);
     try {
       const body = { dateOfBirth: form.dob };
-      if (identifierType === 'passport') body.passportNumber = form.idNumber.trim().toUpperCase();
-      else body.controlNumber = form.idNumber.trim().toUpperCase();
+      body.passportNumber = form.idNumber.trim().toUpperCase();
+      // COMMENTED OUT — control number logic removed
+      // if (identifierType === 'passport') body.passportNumber = form.idNumber.trim().toUpperCase();
+      // else body.controlNumber = form.idNumber.trim().toUpperCase();
 
       const r    = await fetch('/api/candidates/public/track', {
         method: 'POST',
@@ -64,7 +66,7 @@ export default function TrackFormPage() {
       if (data?.success) {
         const params = new URLSearchParams({
           id:     data.data.candidateId,
-          idType: identifierType,
+          // idType: identifierType,  // COMMENTED OUT — control number removed
           idNum:  form.idNumber.trim().toUpperCase(),
           dob:    form.dob,
         });
@@ -105,7 +107,7 @@ export default function TrackFormPage() {
 
             <form onSubmit={handleSubmit}>
 
-              {/* ── ID Type toggle ── */}
+              {/* COMMENTED OUT — ID Type toggle (control number removed, only passport used)
               <div className={styles.field}>
                 <label>Select ID Type *:</label>
                 <div className={styles.idToggle}>
@@ -125,13 +127,16 @@ export default function TrackFormPage() {
                   </button>
                 </div>
               </div>
+              */}
 
               {/* ── Number input ── */}
               <div className={styles.field}>
-                <label>{identifierType === 'passport' ? 'Passport Number' : 'Control Number'} *:</label>
+                {/* COMMENTED OUT — dynamic label: identifierType === 'passport' ? 'Passport Number' : 'Control Number' */}
+                <label>Passport Number *:</label>
                 <input
                   type="text"
-                  placeholder={`Enter ${identifierType === 'passport' ? 'Passport' : 'Control'} Number`}
+                  placeholder="Enter Passport Number"
+                  // COMMENTED OUT — dynamic placeholder: `Enter ${identifierType === 'passport' ? 'Passport' : 'Control'} Number`
                   value={form.idNumber}
                   onChange={set('idNumber')}
                   required

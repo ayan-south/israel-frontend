@@ -1,5 +1,6 @@
 import Footer from '../../../components/user/Footer';
 import Header from '../../../components/user/Header';
+import { Globe, Clock, MapPin } from 'lucide-react';
 import img1 from "../../../assets/one.jpg";
 import img2 from "../../../assets/ambasy.jpg";
 import img3 from "../../../assets/three.jpg";
@@ -112,17 +113,17 @@ export default function HomePage() {
         <h2 className="pub-why-title">Why choose us? Because we are Awesome!</h2>
         <div className="pub-why-grid">
           <div className="pub-why-card">
-            <div className="pub-why-icon">🗂️</div>
+            <div className="pub-why-icon"><Globe size={40} strokeWidth={1.5} /></div>
             <div className="pub-why-label">Visa Services<br />for all Countries</div>
             <p>Besides Israel Visa, we also provide visa services for several other countries! So wherever your travels take you, we are your one-stop visa solution.</p>
           </div>
           <div className="pub-why-card">
-            <div className="pub-why-icon">⏱️</div>
+            <div className="pub-why-icon"><Clock size={40} strokeWidth={1.5} /></div>
             <div className="pub-why-label">10 years of experience<br />in Visa processing</div>
             <p>Our experts have over 10 years of experience in visa services, therefore, when you choose us, your Israel visa is in safe hands!</p>
           </div>
           <div className="pub-why-card">
-            <div className="pub-why-icon">🌐</div>
+            <div className="pub-why-icon"><MapPin size={40} strokeWidth={1.5} /></div>
             <div className="pub-why-label">50+ Branches<br />Worldwide</div>
             <p>If you wish to come down to our branch to apply for your Israel visa, you can do so at any one of our 50+ branches! We&apos;d love to meet you and help you out!</p>
           </div>
