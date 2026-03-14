@@ -2,7 +2,6 @@
 import { useEffect, useState, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Header from '../../../components/user/Header';
-import Footer from '../../../components/user/Footer';
 import styles from './result.module.css';
 
 const fmt = (d) => {
@@ -229,7 +228,6 @@ export default function ResultPage() {
           <ResultContent />
         </Suspense>
       </div>
-      <Footer />
     </div>
   );
 }

@@ -1,7 +1,6 @@
 'use client';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import Footer from '../../../components/user/Footer';
 import Header from '../../../components/user/Header';
 
 const VISA_TYPES = [
@@ -133,7 +132,6 @@ export default function TrackPage() {
         <hr className="track-divider" />
       </div>
 
-      <Footer />
     </div>
   );
 }

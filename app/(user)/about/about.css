@@ -1,0 +1,112 @@
+/* ══════════════════════════════════════════════════════
+   ABOUT PAGE — DEDICATED CSS
+   Same alignment token as home.css
+══════════════════════════════════════════════════════ */
+
+:root {
+  --about-side-pad: 90px;
+  --about-accent: #e05c5c;      /* matches the salmon/red breadcrumb bar */
+  --about-accent-dark: #c94444;
+  --about-text: #1a1a1a;
+  --about-muted: #555;
+  --about-border: #e4e4e4;
+  --about-bg-grey: #f5f5f5;
+}
+
+/* ── Breadcrumb / Page Title Bar ── */
+.about-breadcrumb-bar {
+  background: var(--about-accent);
+  padding: 10px var(--about-side-pad);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.about-breadcrumb-bar span {
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+
+/* ── Shared content wrapper ── */
+.about-wrap {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding-left: var(--about-side-pad);
+  padding-right: var(--about-side-pad);
+  box-sizing: border-box;
+}
+
+/* ── Main intro section ── */
+.about-intro-section {
+  background: #fff;
+  padding: 36px 0 28px;
+}
+
+.about-intro-section p {
+  font-size: 14px;
+  line-height: 1.9;
+  color: var(--about-text);
+  margin-bottom: 18px;
+  text-align: justify;
+}
+
+/* ── Strong points section ── */
+.about-strong-section {
+  background: var(--about-bg-grey);
+  padding: 28px 0 36px;
+}
+
+.about-strong-heading {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--about-text);
+  text-decoration: underline;
+  letter-spacing: 0.4px;
+  margin-bottom: 18px;
+  text-transform: uppercase;
+}
+
+.about-strong-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.about-strong-list li {
+  font-size: 14px;
+  line-height: 1.75;
+  color: var(--about-text);
+  padding-left: 16px;
+  position: relative;
+}
+
+.about-strong-list li::before {
+  content: '–';
+  position: absolute;
+  left: 0;
+  color: var(--about-accent);
+  font-weight: 700;
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  :root {
+    --about-side-pad: 40px;
+  }
+}
+
+@media (max-width: 767px) {
+  :root {
+    --about-side-pad: 16px;
+  }
+
+  .about-intro-section { padding: 24px 0 20px; }
+  .about-strong-section { padding: 20px 0 28px; }
+  .about-intro-section p { font-size: 13.5px; }
+  .about-strong-list li { font-size: 13.5px; }
+}

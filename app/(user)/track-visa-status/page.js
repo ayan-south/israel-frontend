@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Header from '../../../components/user/Header';
-import styles from './track-form.module.css';
+import styles from './track-visa-status.module.css';
 
 const VISA_TYPES = [
   'Employment Visa','Work Visa','Tourist Visa','Business Visa',
@@ -87,7 +87,7 @@ export default function TrackFormPage() {
 
         {/* ── Page Title ── */}
         <div className={styles.pageHead}>
-          <h1 className={styles.pageTitle}>Download Visa:</h1>
+          <h1 className={styles.pageTitle}>Check Your Visa Status</h1>
         </div>
 
         <hr className={styles.divider} />
@@ -165,7 +165,7 @@ export default function TrackFormPage() {
         <hr className={styles.divider} />
       </div>
 
-    
+     
     </div>
   );
 }

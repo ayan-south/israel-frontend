@@ -2,7 +2,6 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Header from '../../../components/user/Header';
-import Footer from '../../../components/user/Footer';
 import styles from './track-application.module.css';
 
 const CITIES = [
@@ -73,7 +72,6 @@ export default function TrackApplicationPage() {
         <hr className={styles.divider} />
       </div>
 
-      <Footer />
     </div>
   );
 }
