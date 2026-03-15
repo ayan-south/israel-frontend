@@ -77,7 +77,7 @@ export default function HomePage() {
 
             {/* Visit Visa */}
             <div className="home-visa-card">
-              <div className="home-visa-label">Visit Visa</div>
+              <div className="home-visa-label">Work Permit Visa</div>
               <div className="home-visa-img-wrap">
                 <Image src={docu} alt="Visit Visa"      width={400} height={220} className="home-visa-img" />
               </div>
