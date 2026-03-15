@@ -105,7 +105,7 @@ body {
   color: #fff;
   text-decoration: none;
   padding: 14px 24px;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 500;
   white-space: nowrap;
   border: none;
@@ -156,7 +156,7 @@ body {
 
         /* ── Responsive ── */
         @media (max-width: 767px) {
-          .pub-nav > a { display: flex; font-size: 11px; padding: 10px 8px; }
+          .pub-nav > a { display: flex; font-size: 13px; padding: 10px 8px; }
           .pub-top { flex-wrap: wrap; gap: 8px; padding: 10px 14px; min-height: auto; }
           .pub-timer { min-width: unset; font-size: 11px; }
           .pub-timer-row { font-size: 11px; gap: 5px; }
@@ -1050,7 +1050,7 @@ body {
   .pub-timer-row { justify-content: center; }
 
   /* Navbar - horizontal scroll */
-  .pub-nav a { padding: 12px 24px; font-size: 12.5px; white-space: nowrap; }
+  .pub-nav a { padding: 12px 24px; font-size: 14px; white-space: nowrap; }
 
   /* Hero */
   .pub-hero {
@@ -1115,7 +1115,7 @@ body {
 
 /* Small mobile: up to 400px */
 @media (max-width: 400px) {
-  .pub-nav a { padding: 10px 12px; font-size: 12px; }
+  .pub-nav a { padding: 10px 12px; font-size: 14px; }
   .pub-hero img { height: 160px; }
   .track-hero h1 { font-size: 20px; }
   .result-table td { padding: 8px 10px; }
@@ -1490,7 +1490,7 @@ body {
         .pub-nav a {
           display: inline-block;
           padding: 16px 24px;
-          font-size: 14px;
+          font-size: 17px;
           font-family: 'Roboto','Georgia', serif;
           color: #333;
           text-decoration: none;
@@ -1523,7 +1523,7 @@ body {
         .pub-nav-mobile-menu a {
           display: block;
           padding: 14px 24px;
-          font-size: 14px;
+          font-size: 17px;
           font-family: 'Roboto','Georgia', serif;
           color: #333;
           text-decoration: none;
@@ -1549,7 +1549,7 @@ body {
           }
           .pub-nav a {
             display: inline-block;
-            font-size: 11px;
+            font-size: 13px;
             padding: 10px 8px;
             gap: 12px;
           }
