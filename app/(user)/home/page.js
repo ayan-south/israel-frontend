@@ -4,6 +4,8 @@ import img2   from '../../../assets/hf2.jpg';
 import img3   from '../../../assets/hf3.jpg';
 import doc    from '../../../assets/visa1.jpeg';
 import docu   from '../../../assets/visa2.jpeg';
+import doc1    from '../../../assets/visa1.jpg';
+import doc2   from '../../../assets/visa2.jpg';
 import last   from '../../../assets/hf4.jpg';
 import lasto  from '../../../assets/hf5.jpg';
 import last1  from '../../../assets/hf6.jpg';
@@ -80,6 +82,22 @@ export default function HomePage() {
               <div className="home-visa-label">Work Permit Visa</div>
               <div className="home-visa-img-wrap">
                 <Image src={docu} alt="Visit Visa"      width={400} height={220} className="home-visa-img" />
+              </div>
+            </div>
+
+            {/* Employment Visa */}
+            <div className="home-visa-card">
+              <div className="home-visa-label">Employment visa</div>
+              <div className="home-visa-img-wrap">
+                <Image src={doc1}  alt="Employment Visa" width={400} height={220} className="home-visa-img" />
+              </div>
+            </div>
+
+            {/* Visit Visa */}
+            <div className="home-visa-card">
+              <div className="home-visa-label">Work Permit Visa</div>
+              <div className="home-visa-img-wrap">
+                <Image src={doc2} alt="Visit Visa"      width={400} height={220} className="home-visa-img" />
               </div>
             </div>
           </div>
