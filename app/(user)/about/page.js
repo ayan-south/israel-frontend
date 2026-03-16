@@ -16,7 +16,7 @@ export default function AboutPage() {
           BREADCRUMB BAR
       ══════════════════════════════ */}
       <div className="about-breadcrumb-bar">
-        <span>1. Home</span>
+        <span>About</span>
       </div>
 
       {/* ══════════════════════════════
