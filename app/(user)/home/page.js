@@ -292,7 +292,7 @@ export default function HomePage() {
             <div className="home-facts-row"><span className="home-facts-label">Independence Day:</span><span className="home-facts-val">14 May</span></div>
             <div className="home-facts-row"><span className="home-facts-label">Capital:</span><span className="home-facts-val">Tel Aviv</span></div>
             <div className="home-facts-row"><span className="home-facts-label">Time in Israel:</span><span className="home-facts-val">IST (-) 2.30 hours</span></div>
-            <div className="home-facts-row"><span className="home-facts-label">Language:</span><span className="home-facts-val">Hebrew (official), Arabic, English</span></div>
+            <div className="home-facts-row"><span className="home-facts-label">Language:</span><span className="home-facts-val">Hebrew (official), English</span></div>
             <div className="home-facts-row"><span className="home-facts-label">Area:</span><span className="home-facts-val">22,072 sq. km</span></div>
             <div className="home-facts-row"><span className="home-facts-label">Population:</span><span className="home-facts-val">7,73,000</span></div>
             <div className="home-facts-row"><span className="home-facts-label">Currency:</span><span className="home-facts-val">Israeli Shekel (ILS)</span></div>
