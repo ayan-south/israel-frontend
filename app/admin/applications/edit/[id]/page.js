@@ -287,6 +287,16 @@ export default function EditPage() {
                   />
                 </div>
 
+                {/* Visa Number */}
+                <div className="fg" style={{ gridColumn:'1 / -1' }}>
+                  <label>Visa Number</label>
+                  <input className="fi" placeholder="e.g. V-1234567" readOnly={readOnly}
+                    value={form.visaNumber}
+                    onChange={e => setForm(p => ({ ...p, visaNumber: e.target.value.toUpperCase() }))}
+                    style={readOnly ? { background:'#f9fafb', color:'#6b7280' } : {}}
+                  />
+                </div>
+
                 {/* COMMENTED OUT — Old conditional ID field (passport vs control toggle rendering)
                 {form.identifierType === 'passport' ? (
                   <div className="fg" style={{ gridColumn:'1 / -1' }}>

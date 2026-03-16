@@ -113,6 +113,7 @@ function ResultContent() {
           { label: 'Passport No',    value: data.passportNumber || '—' },
         ]
     ),
+    { label: 'Visa No',         value: data.visaNumber       || '—' },
     { label: 'Name',            value: data.fullName         || '—' },
     { label: 'Date of birth',   value: fmt(data.dateOfBirth)        },
     { label: 'Profession',      value: data.profession       || '—' },
