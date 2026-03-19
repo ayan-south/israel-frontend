@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { candidateAPI } from '../../../../../lib/api';
@@ -108,9 +108,7 @@ export default function EditPage() {
   const user     = getUser();
 
   const [form, setForm] = useState({
-    // identifierType: 'passport',  // COMMENTED OUT — control number removed
     passportNumber:    '',
-    // controlNumber:     '',        // COMMENTED OUT — control number removed
     visaNumber:        '',
     fullName:          '',
     dateOfBirth:       '',
@@ -126,18 +124,31 @@ export default function EditPage() {
     applicationDate:   '',
   });
 
-  const [photoFile,    setPhotoFile]    = useState(null);
-  const [photoPreview, setPhotoPreview] = useState(null);
-  const [visaDocFile,  setVisaDocFile]  = useState(null);
-  const [visaDocName,  setVisaDocName]  = useState('');
-  const [existingVisaDoc, setExistingVisaDoc] = useState(null);
+  const [photoFile,       setPhotoFile]       = useState(null);
+  const [photoPreview,    setPhotoPreview]     = useState(null);
+  const [visaDocFile,     setVisaDocFile]      = useState(null);
+  const [visaDocName,     setVisaDocName]      = useState('');
+  const [existingVisaDoc, setExistingVisaDoc]  = useState(null);
 
   const [loading, setLoading] = useState(!creating);
   const [saving,  setSaving]  = useState(false);
   const [error,   setError]   = useState('');
 
+  // ── FIX: useRef se blob URL track karo taaki revoke ho sake properly ──
+  const blobUrlRef = useRef(null);
+
   const canEdit = user?.role === 'admin' || user?.role === 'superadmin' || user?.permissions?.canEdit;
   const canAdd  = user?.role === 'admin' || user?.role === 'superadmin' || user?.permissions?.canAdd;
+
+  // ── FIX: Component unmount hone par blob URL revoke karo (memory leak prevent) ──
+  useEffect(() => {
+    return () => {
+      if (blobUrlRef.current) {
+        URL.revokeObjectURL(blobUrlRef.current);
+        blobUrlRef.current = null;
+      }
+    };
+  }, []);
 
   useEffect(() => {
     if (creating) return;
@@ -147,9 +158,7 @@ export default function EditPage() {
         if (r?.success) {
           const d = r.data;
           setForm({
-            // identifierType:    d.identifierType    || 'passport',  // COMMENTED OUT
             passportNumber:    d.passportNumber    || '',
-            // controlNumber:     d.controlNumber     || '',           // COMMENTED OUT
             visaNumber:        d.visaNumber        || '',
             fullName:          d.fullName          || '',
             dateOfBirth:       toDateInput(d.dateOfBirth),
@@ -164,6 +173,7 @@ export default function EditPage() {
             applicationNumber: d.applicationNumber || '',
             applicationDate:   toDateInput(d.applicationDate),
           });
+          // Existing server photo — normal URL, blob nahi, safe hai
           if (d.photo) setPhotoPreview(`/uploads/photos/${d.photo.split('/').pop()}`);
           if (d.visaDocument) {
             setExistingVisaDoc({ type: d.visaDocumentType, name: d.visaDocumentName || 'visa-doc' });
@@ -176,34 +186,60 @@ export default function EditPage() {
 
   const set = (k) => (e) => setForm(p => ({ ...p, [k]: e.target.value }));
 
+  // ── FIX: handlePhoto — pehla blob revoke karo, naya stable URL banao ──
   const handlePhoto = (e) => {
-    const file = e.target.files[0]; if (!file) return;
+    const file = e.target.files[0];
+    if (!file) return;
     if (file.size > 5 * 1024 * 1024) { toast.error('Photo max 5MB'); return; }
+
+    // Pehle wala blob URL revoke karo
+    if (blobUrlRef.current) {
+      URL.revokeObjectURL(blobUrlRef.current);
+      blobUrlRef.current = null;
+    }
+
+    // Naya blob URL banao aur ref mein store karo
+    const newUrl = URL.createObjectURL(file);
+    blobUrlRef.current = newUrl;
+
     setPhotoFile(file);
-    setPhotoPreview(URL.createObjectURL(file));
+    setPhotoPreview(newUrl);
   };
 
+  // ── FIX: handleVisaDoc — File object aur naam dono stable state mein rakho ──
   const handleVisaDoc = (e) => {
-    const file = e.target.files[0]; if (!file) return;
+    const file = e.target.files[0];
+    if (!file) return;
     if (file.size > 10 * 1024 * 1024) { toast.error('Document max 10MB'); return; }
     const ext = file.name.split('.').pop().toLowerCase();
     if (!['jpg','jpeg','png','pdf'].includes(ext)) { toast.error('Only JPG, PNG or PDF allowed'); return; }
+
+    // ── FIX: File object directly state mein rakho — naam alag se bhi save karo ──
     setVisaDocFile(file);
     setVisaDocName(file.name);
   };
 
+  // ── FIX: Photo remove karte waqt blob URL bhi revoke karo ──
+  const handleRemovePhoto = () => {
+    if (blobUrlRef.current) {
+      URL.revokeObjectURL(blobUrlRef.current);
+      blobUrlRef.current = null;
+    }
+    setPhotoFile(null);
+    setPhotoPreview(null);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault(); setError('');
-    // const idVal = form.identifierType === 'control' ? form.controlNumber : form.passportNumber;  // COMMENTED OUT
-    const idVal = form.passportNumber;  // Only passport number now
+    const idVal = form.passportNumber;
     if (!form.fullName || !idVal || !form.dateOfBirth || !form.country || !form.applicationNumber) {
       setError('Name, ID Number, DOB, Country, Application Number — required.'); return;
     }
 
     const fd = new FormData();
     Object.entries(form).forEach(([k, v]) => { if (v !== '' && v !== null && v !== undefined) fd.append(k, v); });
-    if (photoFile) fd.append('photo', photoFile);
-    if (visaDocFile) fd.append('visaDocument', visaDocFile);
+    if (photoFile)   fd.append('photo',        photoFile);
+    if (visaDocFile) fd.append('visaDocument',  visaDocFile);
 
     setSaving(true);
     try {
@@ -253,30 +289,6 @@ export default function EditPage() {
             <div style={{ padding:'18px 20px' }}>
               <div className="form-grid">
 
-                {/* COMMENTED OUT — Identifier Type Toggle (control number removed, only passport used)
-                <div className="fg" style={{ gridColumn:'1 / -1' }}>
-                  <label>Identifier Type <span style={{ color:'#ef4444' }}>*</span></label>
-                  <div className="id-toggle-wrap">
-                    {['passport','control'].map(t => (
-                      <button
-                        key={t} type="button"
-                        className="id-toggle-btn"
-                        onClick={() => !readOnly && setForm(p => ({ ...p, identifierType: t }))}
-                        style={{
-                          padding:'8px 20px', borderRadius:6, fontSize:13, fontWeight:600, cursor: readOnly ? 'default' : 'pointer',
-                          border:`2px solid ${form.identifierType === t ? '#4b5563' : '#e5e7eb'}`,
-                          background: form.identifierType === t ? '#f3f4f6' : '#fff',
-                          color: form.identifierType === t ? '#4b5563' : '#6b7280',
-                          transition:'all 0.15s',
-                        }}
-                      >
-                        {t === 'passport' ? '🛂 Passport Number' : '🔢 Control Number'}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-                */}
-
                 {/* Passport Number — always shown */}
                 <div className="fg" style={{ gridColumn:'1 / -1' }}>
                   <label>Passport Number <span style={{ color:'#ef4444' }}>*</span></label>
@@ -296,38 +308,6 @@ export default function EditPage() {
                     style={readOnly ? { background:'#f9fafb', color:'#6b7280' } : {}}
                   />
                 </div>
-
-                {/* COMMENTED OUT — Old conditional ID field (passport vs control toggle rendering)
-                {form.identifierType === 'passport' ? (
-                  <div className="fg" style={{ gridColumn:'1 / -1' }}>
-                    <label>Passport Number <span style={{ color:'#ef4444' }}>*</span></label>
-                    <input className="fi" placeholder="e.g. A1234567" readOnly={readOnly || !creating}
-                      value={form.passportNumber}
-                      onChange={e => setForm(p => ({ ...p, passportNumber: e.target.value.toUpperCase() }))}
-                      style={readOnly || !creating ? { background:'#f9fafb', color:'#6b7280' } : {}}
-                    />
-                  </div>
-                ) : (
-                  <>
-                    <div className="fg">
-                      <label>Control Number <span style={{ color:'#ef4444' }}>*</span></label>
-                      <input className="fi" placeholder="e.g. CTL-2024-001" readOnly={readOnly}
-                        value={form.controlNumber}
-                        onChange={e => setForm(p => ({ ...p, controlNumber: e.target.value.toUpperCase() }))}
-                        style={readOnly ? { background:'#f9fafb', color:'#6b7280' } : {}}
-                      />
-                    </div>
-                    <div className="fg">
-                      <label>Passport Number</label>
-                      <input className="fi" placeholder="e.g. A1234567" readOnly={readOnly || !creating}
-                        value={form.passportNumber}
-                        onChange={e => setForm(p => ({ ...p, passportNumber: e.target.value.toUpperCase() }))}
-                        style={readOnly || !creating ? { background:'#f9fafb', color:'#6b7280' } : {}}
-                      />
-                    </div>
-                  </>
-                )}
-                */}
 
                 <div className="fg">
                   <label>Full Name <span style={{ color:'#ef4444' }}>*</span></label>
@@ -353,7 +333,6 @@ export default function EditPage() {
                   <input className="fi" type="date" readOnly={readOnly}
                     value={form.applicationDate} onChange={set('applicationDate')} />
                 </div>
-
 
                 <div className="fg">
                   <label>Visa Type</label>
@@ -407,8 +386,10 @@ export default function EditPage() {
             </div>
           </div>
 
-          {/* ── RIGHT: Status + Visa Document ── */}
+          {/* ── RIGHT: Photo + Status + Visa Document ── */}
           <div style={{ display:'flex', flexDirection:'column', gap:14 }}>
+
+
 
             {/* Status */}
             <div className="card">
@@ -445,16 +426,19 @@ export default function EditPage() {
                   </div>
                 )}
 
-                {/* New file selected */}
-                {visaDocFile && (
+                {/* ── FIX: New file selected — visaDocName stable state se aata hai, disappear nahi hoga ── */}
+                {visaDocFile && visaDocName && (
                   <div style={{ background:'#f3f4f6', border:'1px solid #d1d5db', borderRadius:6, padding:'8px 10px', marginBottom:10, display:'flex', alignItems:'center', gap:8 }}>
                     <span style={{ fontSize:16 }}>{visaDocName.endsWith('.pdf') ? '📄' : '🖼️'}</span>
                     <div>
                       <div style={{ fontSize:12, fontWeight:600, color:'#374151' }}>New: {visaDocName}</div>
-                      <div style={{ fontSize:11, color:'#6b7280' }}>({(visaDocFile.size / 1024 / 1024).toFixed(1)}MB)</div>
+                      <div style={{ fontSize:11, color:'#6b7280' }}>({(visaDocFile.size / 1024 / 1024).toFixed(1)} MB)</div>
                     </div>
-                    <button type="button" onClick={() => { setVisaDocFile(null); setVisaDocName(''); }}
-                      style={{ marginLeft:'auto', background:'none', border:'none', cursor:'pointer', color:'#9ca3af', fontSize:14 }}>✕</button>
+                    <button
+                      type="button"
+                      onClick={() => { setVisaDocFile(null); setVisaDocName(''); }}
+                      style={{ marginLeft:'auto', background:'none', border:'none', cursor:'pointer', color:'#9ca3af', fontSize:14 }}
+                    >✕</button>
                   </div>
                 )}
 
@@ -462,7 +446,7 @@ export default function EditPage() {
                   <label style={{ display:'block', cursor:'pointer' }}>
                     <div style={{ border:'2px dashed #d1d5db', borderRadius:8, padding:'14px', textAlign:'center', fontSize:12, color:'#6b7280', background:'#f9fafb' }}>
                       <div style={{ fontSize:24, marginBottom:4 }}>📎</div>
-                      Click to upload visa document<br/>
+                      {visaDocFile ? 'Click to change document' : 'Click to upload visa document'}<br/>
                       <span style={{ fontSize:10, color:'#9ca3af' }}>PDF, JPG, PNG (max 10MB)</span>
                     </div>
                     <input type="file" accept=".pdf,.jpg,.jpeg,.png" onChange={handleVisaDoc} style={{ display:'none' }} />

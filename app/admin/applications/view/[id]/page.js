@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { candidateAPI } from '../../../../../lib/api';
@@ -25,17 +25,13 @@ const printVisaDoc = (appNo, docBlobUrl, docType) => {
   if (!docBlobUrl) { toast.error('No document to print'); return; }
 
   if (docType === 'pdf') {
-    // PDF: blob URL ko directly new tab mein kholo — browser ka native PDF print use hoga
     const w = window.open(docBlobUrl, '_blank');
     if (!w) { toast.error('Popup blocked. Please allow popups for this site.'); return; }
-    // PDF viewer load hone ke baad print dialog
     w.addEventListener('load', () => { setTimeout(() => { w.print(); }, 500); });
-    // Fallback agar load event na chale
     setTimeout(() => { try { w.print(); } catch(e) {} }, 2000);
     return;
   }
 
-  // Image: naya window kholo, image load hone ke BAAD print karo — turant band nahi hoga
   const w = window.open('', '_blank');
   if (!w) { toast.error('Popup blocked. Please allow popups for this site.'); return; }
   w.document.write(`<!DOCTYPE html><html><head>
@@ -60,22 +56,33 @@ export default function ViewDetailsPage() {
   const router  = useRouter();
   const user    = getUser();
 
-  const [data,      setData]      = useState(null);
-  const [loading,   setLoading]   = useState(true);
-  const [newStatus, setNewStatus] = useState('');
-  const [updating,  setUpdating]  = useState(false);
-  // For authenticated doc display
+  const [data,       setData]      = useState(null);
+  const [loading,    setLoading]   = useState(true);
+  const [newStatus,  setNewStatus] = useState('');
+  const [updating,   setUpdating]  = useState(false);
   const [docBlobUrl, setDocBlobUrl] = useState(null);
+
+  // ── FIX: blob URL ref mein track karo ──
+  const blobUrlRef = useRef(null);
 
   const canEdit     = user?.role === 'admin' || user?.role === 'superadmin' || user?.permissions?.canEdit;
   const canDownload = user?.role === 'admin' || user?.role === 'superadmin' || user?.permissions?.canDownload;
 
   useEffect(() => { load(); }, [id]);
 
-  // Cleanup blob URL on unmount
+  // ── FIX: [] — sirf unmount pe cleanup, [docBlobUrl] nahi ──
+  // Pehle wala bug: useEffect cleanup [docBlobUrl] dependency ke saath tha
+  // Jab bhi docBlobUrl state set hoti thi, React pehle effect ka cleanup
+  // run karta tha — matlab NAYA blob URL bhi foran revoke ho jaata tha
+  // isiliye image/PDF thodi der dikhke hat jaati thi!
   useEffect(() => {
-    return () => { if (docBlobUrl) URL.revokeObjectURL(docBlobUrl); };
-  }, [docBlobUrl]);
+    return () => {
+      if (blobUrlRef.current) {
+        URL.revokeObjectURL(blobUrlRef.current);
+        blobUrlRef.current = null;
+      }
+    };
+  }, []); // ← IMPORTANT: empty array
 
   const load = async () => {
     setLoading(true);
@@ -84,7 +91,6 @@ export default function ViewDetailsPage() {
       if (r?.success) {
         setData(r.data);
         setNewStatus(r.data.status);
-        // If doc exists, load it as authenticated blob
         if (r.data.visaDocument) {
           loadDocBlob(r.data);
         }
@@ -96,20 +102,37 @@ export default function ViewDetailsPage() {
     finally  { setLoading(false); }
   };
 
-  // Fetch doc with auth token and create blob URL
+  // ── FIX: blob ka type force karo — server se content-type nahi aata toh embed kaam nahi karta ──
   const loadDocBlob = async (candidate) => {
     try {
       const token = localStorage.getItem('token');
       const r = await fetch(`/api/candidates/admin/download/${candidate._id}`, {
         headers: token ? { 'Authorization': `Bearer ${token}` } : {},
-        credentials: 'include',
+        credentials: 'same-origin',
       });
-      if (!r.ok) return;
-      const blob = await r.blob();
-      const url  = URL.createObjectURL(blob);
+      if (!r.ok) {
+        console.error('Doc fetch failed:', r.status);
+        return;
+      }
+
+      const rawBlob = await r.blob();
+
+      // PDF detect karo — type ya filename se
+      const isPdf = candidate.visaDocumentType === 'pdf'
+        || candidate.visaDocumentName?.toLowerCase().endsWith('.pdf')
+        || rawBlob.type === 'application/pdf';
+
+      // Blob ka MIME type force karo — warna <embed> PDF render nahi karta
+      const correctType = isPdf ? 'application/pdf' : (rawBlob.type || 'image/jpeg');
+      const blob = new Blob([rawBlob], { type: correctType });
+
+      if (blobUrlRef.current) URL.revokeObjectURL(blobUrlRef.current);
+
+      const url = URL.createObjectURL(blob);
+      blobUrlRef.current = url;
       setDocBlobUrl(url);
-    } catch {
-      // silent — doc won't display but that's ok
+    } catch (e) {
+      console.error('loadDocBlob error:', e);
     }
   };
 
@@ -257,8 +280,13 @@ export default function ViewDetailsPage() {
 
           {docBlobUrl ? (
             <div id="admin-visa-doc-area" style={{ textAlign:'center' }}>
-              {data.visaDocumentType === 'pdf' ? (
-                <embed src={docBlobUrl} type="application/pdf" style={{ width:'100%', minHeight:700, border:'1px solid #ddd', borderRadius:4, display:'block' }} />
+              {(data.visaDocumentType === 'pdf' || data.visaDocumentName?.toLowerCase().endsWith('.pdf')) ? (
+                // iframe — sabse reliable cross-browser PDF renderer hai
+                <iframe
+                  src={docBlobUrl}
+                  title="Visa Document PDF"
+                  style={{ width:'100%', height:750, border:'1px solid #ddd', borderRadius:4, display:'block' }}
+                />
               ) : (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img src={docBlobUrl} alt="Visa Document" style={{ maxWidth:'100%', height:'auto', border:'1px solid #ddd', borderRadius:4 }} />
