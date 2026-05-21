@@ -248,7 +248,7 @@ export default function ViewDetailsPage() {
           color:'#fff', padding:'9px 20px', textAlign:'center', fontSize:13, fontWeight:700,
           borderRadius: isApproved ? 0 : '6px 6px 0 0',
         }}>
-          South Africa Visa Immigration Services
+          Israel Visa Immigration Services
         </div>
 
         {/* ── Details table ── */}
